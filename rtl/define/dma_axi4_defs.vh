@@ -1,0 +1,48 @@
+`ifndef DMA_AXI4_DEFS_VH
+`define DMA_AXI4_DEFS_VH
+
+`define DMA_APP_DATA_WIDTH      512
+`define DMA_APP_BYTES           64
+`define DMA_CMD2_WIDTH          64
+`define DMA_TXN_DESC_WIDTH      64
+`define DMA_AXI_MAX_BURST_BEATS 256
+`define DMA_4KB_BYTES           4096
+
+`ifndef DMA_AXI_DATA_WIDTH_64
+`ifndef DMA_AXI_DATA_WIDTH_128
+`ifndef DMA_AXI_DATA_WIDTH_256
+`ifndef DMA_AXI_DATA_WIDTH_512
+`define DMA_AXI_DATA_WIDTH_512
+`endif
+`endif
+`endif
+`endif
+
+`ifdef DMA_AXI_DATA_WIDTH_64
+  `define DMA_AXI_SELECTED_DATA_WIDTH 64
+  `define DMA_AXI_SELECTED_STRB_WIDTH 8
+  `define DMA_AXI_SELECTED_SIZE       3'b011
+  `define DMA_BEATS_PER_APP          8
+`elsif DMA_AXI_DATA_WIDTH_128
+  `define DMA_AXI_SELECTED_DATA_WIDTH 128
+  `define DMA_AXI_SELECTED_STRB_WIDTH 16
+  `define DMA_AXI_SELECTED_SIZE       3'b100
+  `define DMA_BEATS_PER_APP          4
+`elsif DMA_AXI_DATA_WIDTH_256
+  `define DMA_AXI_SELECTED_DATA_WIDTH 256
+  `define DMA_AXI_SELECTED_STRB_WIDTH 32
+  `define DMA_AXI_SELECTED_SIZE       3'b101
+  `define DMA_BEATS_PER_APP          2
+`elsif DMA_AXI_DATA_WIDTH_512
+  `define DMA_AXI_SELECTED_DATA_WIDTH 512
+  `define DMA_AXI_SELECTED_STRB_WIDTH 64
+  `define DMA_AXI_SELECTED_SIZE       3'b110
+  `define DMA_BEATS_PER_APP          1
+`else
+  `define DMA_AXI_SELECTED_DATA_WIDTH 0
+  `define DMA_AXI_SELECTED_STRB_WIDTH 0
+  `define DMA_AXI_SELECTED_SIZE       3'b000
+  `define DMA_BEATS_PER_APP          0
+`endif
+
+`endif

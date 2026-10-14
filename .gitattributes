@@ -1,0 +1,47 @@
+# ============================================================
+# 行尾策略：仓库内统一存 LF，检出也用 LF
+#
+# 原因：Windows 主机写代码、Linux 服务器跑 Vivado/VCS。
+# CRLF 在 Linux 侧会让 .f 文件列表、shell 脚本、部分工具的
+# 行解析出问题。统一成 LF 后两边内容一致，不用来回折腾。
+# ============================================================
+
+* text=auto eol=lf
+
+# ---------------- RTL / 工程源码：一律 LF ----------------
+*.v        text eol=lf
+*.vh       text eol=lf
+*.sv       text eol=lf
+*.svh      text eol=lf
+*.f        text eol=lf
+*.tcl      text eol=lf
+*.xdc      text eol=lf
+*.xpr      text eol=lf
+*.xci      text eol=lf
+*.sh       text eol=lf
+*.py       text eol=lf
+*.md       text eol=lf
+
+# ---------------- Windows 专用脚本：保持 CRLF ----------------
+# PowerShell / 批处理用 LF 会出问题，这里显式覆盖上面的规则
+*.ps1      text eol=crlf
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+
+# ---------------- 二进制：禁止任何转换 ----------------
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.bmp      binary
+*.pdf      binary
+*.vsdx     binary
+*.bit      binary
+*.dcp      binary
+*.hdf      binary
+*.xsa      binary
+*.vcd      binary
+*.vvp      binary
+*.zip      binary
+*.gz       binary
+*.tar      binary
